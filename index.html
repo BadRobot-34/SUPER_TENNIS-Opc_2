@@ -2,14 +2,14 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Stream Autoplay</title>
+  <title>Stream sin popups</title>
 
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background: #000;
+      background: #333;
     }
     iframe {
       width: 100%;
@@ -17,41 +17,13 @@
       border: 0;
     }
   </style>
-
-  <script>
-    // Bloquea popups del iframe
-    window.open = function() {
-      console.log("Popup bloqueado");
-      return null;
-    };
-
-    // Bloquea intentos de abrir publicidad al hacer clic
-    document.addEventListener("click", function(e) {
-      if (e.target.tagName !== "IFRAME") {
-        e.preventDefault();
-      }
-    }, true);
-
-    // Truco para activar autoplay dentro del iframe
-    function activarAutoplay() {
-      const iframe = document.getElementById("stream");
-      iframe.contentWindow.postMessage("play", "*");
-    }
-
-    window.onload = function() {
-      setTimeout(activarAutoplay, 1500); // espera a que cargue el reproductor
-    };
-  </script>
-
 </head>
 <body>
 
   <iframe
-    id="stream"
     src="https://streamxhd.com/live1.php?stream=espnar"
-    allow="autoplay"
     allowfullscreen
-    sandbox=""
+    sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-presentation"
     referrerpolicy="no-referrer">
   </iframe>
 
