@@ -2,30 +2,35 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Stream sin popups</title>
-
+  <title>Stream embebido</title>
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      background: #333;
+      background: #000;
+    }
+    .wrapper {
+      width: 100%;
+      height: 100%;
     }
     iframe {
       width: 100%;
       height: 100%;
       border: 0;
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-
-  <iframe
-    src="https://streamxhd.com/live1.php?stream=espnar"
-    allowfullscreen
-    sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-presentation"
-    referrerpolicy="no-referrer">
-  </iframe>
-
+  <div class="wrapper">
+    <iframe
+      src="https://streamxhd.com/live1.php?stream=espnar"
+      allow="autoplay; encrypted-media" 
+      allowfullscreen
+      referrerpolicy="no-referrer"
+      scrolling="no">
+    </iframe>
+  </div>
 </body>
 </html>
