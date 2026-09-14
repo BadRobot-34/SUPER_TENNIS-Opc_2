@@ -2,7 +2,8 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>Stream embebido</title>
+  <title>Stream Autoplay</title>
+
   <style>
     html, body {
       margin: 0;
@@ -10,27 +11,49 @@
       height: 100%;
       background: #000;
     }
-    .wrapper {
-      width: 100%;
-      height: 100%;
-    }
     iframe {
       width: 100%;
       height: 100%;
       border: 0;
-      pointer-events: none;
     }
   </style>
+
+  <script>
+    // Bloquea popups del iframe
+    window.open = function() {
+      console.log("Popup bloqueado");
+      return null;
+    };
+
+    // Bloquea intentos de abrir publicidad al hacer clic
+    document.addEventListener("click", function(e) {
+      if (e.target.tagName !== "IFRAME") {
+        e.preventDefault();
+      }
+    }, true);
+
+    // Truco para activar autoplay dentro del iframe
+    function activarAutoplay() {
+      const iframe = document.getElementById("stream");
+      iframe.contentWindow.postMessage("play", "*");
+    }
+
+    window.onload = function() {
+      setTimeout(activarAutoplay, 1500); // espera a que cargue el reproductor
+    };
+  </script>
+
 </head>
 <body>
-  <div class="wrapper">
-    <iframe
-      src="https://streamxhd.com/live1.php?stream=espnar"
-      allow="autoplay; encrypted-media" 
-      allowfullscreen
-      referrerpolicy="no-referrer"
-      scrolling="no">
-    </iframe>
-  </div>
+
+  <iframe
+    id="stream"
+    src="https://streamxhd.com/live1.php?stream=espnar"
+    allow="autoplay"
+    allowfullscreen
+    sandbox="allow-same-origin allow-scripts allow-pointer-lock allow-presentation"
+    referrerpolicy="no-referrer">
+  </iframe>
+
 </body>
 </html>
